@@ -1,0 +1,31 @@
+<div>
+
+  <input id="combo"
+         type="search"
+         aria-owns="panel"
+         [attr.aria-activedescendant]="activeItemId"
+         [ngModel]="searchTerm"
+         (ngModelChange)="onModelChanges($event)"
+  >
+
+  <div id="panel"
+       role="listbox"
+       [attr.aria-expanded]="panelExpanded"
+  >
+
+    <ng-container *ngIf="items.length && panelExpanded">
+
+      <div *ngFor="let item of items; let index = index"
+           role="option"
+           [id]="getId(index)"
+           [attr.aria-selected]="index === selectedIndex"
+           (click)="onSelect(item, index)"
+      >
+        {{ item.value }}
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>
